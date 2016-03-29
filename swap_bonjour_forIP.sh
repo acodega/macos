@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #
 # Let's get rid of a Bonjour printer and install at as IP
