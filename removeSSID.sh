@@ -4,18 +4,18 @@
 # Check if Swipely Inc SSID exists and delete it if it does.
 #
 
-# Grep for it
-result=`networksetup -listpreferredwirelessnetworks en0 | grep Swipely\ Inc`
+wifinetwork="Swipely Inc"
+searchresult=$(networksetup -listpreferredwirelessnetworks en0 | grep $wifinetwork)
 
 # If it
 if [ "$result" = "" ]; then
-    echo "No Inc SSID Found"
+    echo "No $wifinetwork SSID Found"
     exit 0
 else
-    echo "Inc SSID Found, Removing..."
+    echo "$wifinetwork SSID Found, Removing..."
 fi
 
 # Delete it
-networksetup -removepreferredwirelessnetwork en0 Swipely\ Inc
-echo "Inc SSID Removed"
+networksetup -removepreferredwirelessnetwork en0 $wifinetwork
+echo "$wifinetwork SSID Removed"
 exit 0
