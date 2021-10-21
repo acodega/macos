@@ -1,21 +1,22 @@
 #!/bin/sh
 
 #
-# Check if Swipely Inc SSID exists and delete it if it does.
+# Check if an SSID exists and delete it if it does.
+# Change the wifinetwork variable to the name of your SSID.
 #
 
-wifinetwork="Swipely Inc"
-searchresult=$(networksetup -listpreferredwirelessnetworks en0 | grep $wifinetwork)
+wifiNetwork="Contoso Inc"
+searchResult=$(networksetup -listpreferredwirelessnetworks en0 | grep $wifiNetwork)
 
-# If it
-if [ "$result" = "" ]; then
-    echo "No $wifinetwork SSID Found"
+# Search for it
+if [ "$searchResult" = "" ]; then
+    echo "No $wifiNetwork SSID Found"
     exit 0
 else
-    echo "$wifinetwork SSID Found, Removing..."
+    echo "$wifiNetwork SSID Found, Removing..."
 fi
 
 # Delete it
-networksetup -removepreferredwirelessnetwork en0 $wifinetwork
-echo "$wifinetwork SSID Removed"
+networksetup -removepreferredwirelessnetwork en0 $wifiNetwork
+echo "$wifiNetwork SSID Removed"
 exit 0
