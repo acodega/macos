@@ -6,7 +6,7 @@
 #
 
 wifiNetwork="Contoso Inc"
-searchResult=$(networksetup -listpreferredwirelessnetworks en0 | grep $wifiNetwork)
+searchResult=$(networksetup -listpreferredwirelessnetworks en0 | grep "$wifiNetwork")
 
 # Search for it
 if [ "$searchResult" = "" ]; then
@@ -17,6 +17,6 @@ else
 fi
 
 # Delete it
-networksetup -removepreferredwirelessnetwork en0 $wifiNetwork
+networksetup -removepreferredwirelessnetwork en0 "$wifiNetwork"
 echo "$wifiNetwork SSID Removed"
 exit 0
