@@ -6,21 +6,31 @@
 # Turn Wi-Fi off and on in order to disconnect from the removed network.
 #
 
-wifiInterface=$(/usr/sbin/networksetup -listallhardwareports | /usr/bin/awk '/Wi-Fi|AirPort/ {getline; print $NF}')
+wifiInterface=$(networksetup -listallhardwareports | /usr/bin/awk '/Wi-Fi|AirPort/ {getline; print $NF}')
 wifiNetwork="Contoso Inc"
-searchResult=$(networksetup -listpreferredwirelessnetworks en0 | grep "$wifiNetwork")
+activeWiFiNetwork=$(networksetup -getairportnetwork $wifiInterface | cut -c 24-)
+searchResult=$(networksetup -listpreferredwirelessnetworks $wifiInterface | grep "$wifiNetwork")
 
 # Search for it
 if [ "$searchResult" = "" ]; then
-    echo "No $wifiNetwork SSID Found"
+    echo "No saved $wifiNetwork found"
     exit 0
 else
-    echo "$wifiNetwork SSID Found, Removing..."
+    echo "$wifiNetwork found as a saved network. Removing.."
 fi
 
 # Delete it
 networksetup -removepreferredwirelessnetwork $wifiInterface "$wifiNetwork"
 
+# Check active SSID
+if [ "$activeWiFiNetwork" = "$wifiNetwork" ]; then
+    echo "Not currently connected to $wifiNetwork"
+    exit 0
+else
+    echo "$wifiNetwork found as an active network, power cycling..."
+fi
+
+# Power cycle Wi-Fi so network is disconnected
 networksetup -setairportpower $wifiInterface off
 sleep 0.5
 networksetup -setairportpower $wifiInterface on
