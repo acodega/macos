@@ -18,10 +18,8 @@ if [ "$searchResult" = "" ]; then
 #    exit 0
 else
     echo "$wifiNetwork found as a saved network. Removing.."
+    networksetup -removepreferredwirelessnetwork $wifiInterface "$wifiNetwork"
 fi
-
-# Delete it
-networksetup -removepreferredwirelessnetwork $wifiInterface "$wifiNetwork"
 
 # Check active SSID
 if [ "$activeWiFiNetwork" = "$wifiNetwork" ]; then
