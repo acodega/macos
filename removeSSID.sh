@@ -1,21 +1,26 @@
 #!/bin/sh
 
 #
-# Check if Swipely Inc SSID exists and delete it if it does.
+# Check if an SSID exists and delete it if it does.
+# Change the wifinetwork variable to the name of your SSID.
+# Turn Wi-Fi off and on in order to disconnect from the removed network.
 #
 
-wifinetwork="Swipely Inc"
-searchresult=$(networksetup -listpreferredwirelessnetworks en0 | grep $wifinetwork)
+wifiInterface=$(/usr/sbin/networksetup -listallhardwareports | /usr/bin/awk '/Wi-Fi|AirPort/ {getline; print $NF}')
+wifiNetwork="Contoso Inc"
+searchResult=$(networksetup -listpreferredwirelessnetworks en0 | grep "$wifiNetwork")
 
-# If it
-if [ "$result" = "" ]; then
-    echo "No $wifinetwork SSID Found"
+# Search for it
+if [ "$searchResult" = "" ]; then
+    echo "No $wifiNetwork SSID Found"
     exit 0
 else
-    echo "$wifinetwork SSID Found, Removing..."
+    echo "$wifiNetwork SSID Found, Removing..."
 fi
 
 # Delete it
-networksetup -removepreferredwirelessnetwork en0 $wifinetwork
-echo "$wifinetwork SSID Removed"
-exit 0
+networksetup -removepreferredwirelessnetwork $wifiInterface "$wifiNetwork"
+
+networksetup -setairportpower $wifiInterface off
+sleep 0.5
+networksetup -setairportpower $wifiInterface on
