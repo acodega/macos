@@ -12,9 +12,10 @@ activeWiFiNetwork=$(networksetup -getairportnetwork $wifiInterface | cut -c 24-)
 searchResult=$(networksetup -listpreferredwirelessnetworks $wifiInterface | grep "$wifiNetwork")
 
 # Search for it
+# Depending on your needs you may have nothing else to do, uncomment line 18 if so
 if [ "$searchResult" = "" ]; then
     echo "No saved $wifiNetwork found"
-    exit 0
+#    exit 0
 else
     echo "$wifiNetwork found as a saved network. Removing.."
 fi
