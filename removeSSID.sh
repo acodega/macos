@@ -22,7 +22,7 @@ else
 fi
 
 # Check active SSID
-if [ "$activeWiFiNetwork" = "$wifiNetwork" ]; then
+if [ "$activeWiFiNetwork" != "$wifiNetwork" ]; then
     echo "Not currently connected to $wifiNetwork"
     exit 0
 else
