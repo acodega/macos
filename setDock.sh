@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+# Tested successfully on macOS Monterey and macOS Ventura
+
 autoload is-at-least
 installedOSversion=$(sw_vers -productVersion)
 currentUser=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ { print $3 }' )
