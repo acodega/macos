@@ -5,19 +5,19 @@
 waitForUser(){
     setupAssistantProcess=$(pgrep -l "Setup Assistant")
     until [ "$setupAssistantProcess" = "" ]; do
-        printlog "Setup Assistant Still Running. PID $setupAssistantProcess"
+        echo "Setup Assistant Still Running. PID $setupAssistantProcess"
         sleep 1
         setupAssistantProcess=$(pgrep -l "Setup Assistant")
     done
-    printlog "Out of Setup Assistant"
-    printlog "Logged in user is $(scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ { print $3 }')"
+    echo "Out of Setup Assistant"
+    echo "Logged in user is $(scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ { print $3 }')"
 
     finderProcess=$(pgrep -l "Finder")
     until [ "$finderProcess" != "" ]; do
-    printlog "Finder process not found. Assuming device is at login screen. PID $finderProcess"
+    echo "Finder process not found. Assuming device is at login screen. PID $finderProcess"
         sleep 1
         finderProcess=$(pgrep -l "Finder")
     done
-    printlog "Finder is running"
-    printlog "Logged in user is $(scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ { print $3 }')"
+    echo "Finder is running"
+    echo "Logged in user is $(scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ { print $3 }')"
 }
