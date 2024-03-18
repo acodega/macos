@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/zsh --no-rcs
 
 # Tested successfully on macOS Monterey and macOS Ventura
 

@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/zsh --no-rcs
 
 if [ -e /Applications/zoom.us.app ]; then
     zoomStatus=$(/usr/libexec/PlistBuddy -c "print ZITPackage" /Applications/zoom.us.app/Contents/Info.plist 2>/dev/null)

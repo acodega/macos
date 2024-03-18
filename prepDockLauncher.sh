@@ -28,7 +28,7 @@ EOF
 
 # Create program script
 cat <<EOF > "${launchdaemon_program_filepath}"
-#!/bin/zsh
+#!/bin/zsh --no-rcs
 autoload is-at-least
 installedOSversion=\$(sw_vers -productVersion)
 launchdaemon_filepath="/Library/LaunchDaemons/com.contoso.docksettings.plist"
