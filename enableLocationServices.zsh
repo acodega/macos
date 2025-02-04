@@ -1,6 +1,8 @@
-#!/bin/bash
-# Turn on Location Services programmatically
+#!/bin/zsh --no-rcs
+# shellcheck shell=bash
+# set -x
 #
+# Turn on Location Services programmatically.
 # People travel. Don't set the time zone manually.
 #
 # Adam Codega
